@@ -1,97 +1,123 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Learning Read App
 
-# Getting Started
+A React Native mobile application designed to help children learn to read in Spanish through interactive letter and word exercises.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- **Random Letter/Word Mode**: Randomly generates letters or words for practice, with audio pronunciation
+- **Letter Selection**: Interactive alphabet interface where users can:
+  - Select individual letters
+  - See and hear words beginning with the selected letter
+  - Practice pronunciation through audio feedback
+- **Vowels Practice**: Dedicated section for practicing vowels
+- **Complete Alphabet**: Sequential practice of the entire alphabet with example words
+- **Audio Support**: High-quality audio pronunciation for:
+  - Individual letters (including 'Ñ')
+  - Complete words
+  - Special characters and accented vowels (á, é, í, ó, ú)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Technical Overview
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Built With
+- React Native
+- React Navigation
+- react-native-sound for audio management
 
-```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+### Project Structure
+```
+LearningRead/
+├── src/
+│   ├── screens/
+│   │   ├── AlphabetScreen.tsx     # Sequential alphabet practice
+│   │   ├── LetterSelectionScreen.tsx  # Interactive letter selection
+│   │   ├── RandomScreen.tsx       # Random letter/word practice
+│   │   └── VowelsScreen.tsx       # Vowels practice
+│   └── utils/
+│       └── SoundManager.ts        # Audio management system
+├── assets/
+│   └── sounds/                    # Audio files for letters and words
+└── ios/ & android/               # Native platform code
 ```
 
-## Step 2: Build and run your app
+### Features in Detail
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+#### Sound Management
+- Centralized audio system through `SoundManager`
+- Supports:
+  - Individual letter pronunciation
+  - Word-by-word playback
+  - Sequential word pronunciation
+  - Audio cleanup on component unmount
 
-### Android
+#### Interactive Screens
+1. **Random Screen**
+   - Generates random letters or words
+   - Includes repeat functionality
+   - Clear audio feedback
 
-```sh
-# Using npm
-npm run android
+2. **Letter Selection Screen**
+   - Interactive alphabet grid
+   - Word examples for each letter
+   - Audio pronunciation for both letters and words
 
-# OR using Yarn
-yarn android
+3. **Vowels Screen**
+   - Focused practice on vowels (a, e, i, o, u)
+   - Includes accented variations
+   - Example words for each vowel
+
+4. **Alphabet Screen**
+   - Sequential alphabet navigation
+   - Example words for each letter
+   - Animated letter transitions
+
+## Getting Started
+
+### Prerequisites
+- Node.js
+- React Native development environment
+- iOS/Android development tools
+
+### Installation
+1. Clone the repository
+```bash
+git clone [repository-url]
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+2. Install dependencies
+```bash
+npm install
 ```
 
-Then, and every time you update your native dependencies, run:
+3. Run the application
+```bash
+# For iOS
+npx react-native run-ios
 
-```sh
-bundle exec pod install
+# For Android
+npx react-native run-android
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## Usage
 
-```sh
-# Using npm
-npm run ios
+The app provides multiple learning modes:
+1. Use the Random mode for spontaneous practice
+2. Select specific letters to practice with related words
+3. Focus on vowels in the dedicated vowels section
+4. Practice the complete alphabet in sequence
 
-# OR using Yarn
-yarn ios
-```
+Each mode includes audio support - tap on letters or words to hear their pronunciation.
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## License
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+This project is licensed under standard open-source terms. See LICENSE file for details.
 
-## Step 3: Modify your app
+## Important Notes
 
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+### Development Notes
+- This project was created entirely with AI assistance (GitHub Copilot)
+- A modification in the `react-native-sound` dependency is required:
+  - File: `node_modules/react-native-sound/sound.js`
+  - Line 40: Update code to::
+    ```js
+    var asset = resolveAssetSource.default(filename);
+    ```
